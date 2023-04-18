@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import ResetPassword from './components/ResetPassword'
 import viteLogo from '/vite.svg'
 
 function App() {
@@ -7,9 +8,10 @@ function App() {
 
   return (
     <div className="flex items-center justify-center h-screen gap-4">
-        <img src={reactLogo} className="animate-spin" alt="logo"  />
+        {/* <img src={reactLogo} className="animate-spin" alt="logo"  />
         <img src={viteLogo} alt="Vite-logo" className='animate-ping'/>
-      <h1 className='text-blue-500'>Welcome to our app</h1>
+      <h1 className='text-blue-500'>Welcome to our app</h1> */}
+      <ResetPassword />
     </div>
   )
 }
