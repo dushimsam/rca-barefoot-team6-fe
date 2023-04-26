@@ -1,11 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import React from 'react';
-import App from "../App"
+import { render } from "@testing-library/react";
+import App from "../components/App"
 
-describe('App tests', () => {
-    it('should contains the heading 1', () => {
-    render(<App />);
-        const heading = screen.getByText(/Hello world/i);
-        expect(heading).toBeInTheDocument()
-    });
+test('renders hello world text', () => {
+  const { getByText } = render(<App />);
+  const helloWorldText = getByText(/Hello world!/i);
+  expect(helloWorldText).toBeInTheDocument();
 });
