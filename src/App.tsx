@@ -13,7 +13,8 @@ import About from './pages/about';
 import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import ForgotPassword from './pages/auth/forgot';
-
+import NewPassword from './pages/auth/newPassword';
+import Reset from './pages/auth/reset';
 function App() {
   const router = createBrowserRouter([
     {
@@ -46,7 +47,11 @@ function App() {
             },
             {
               path: 'forgot-password',
-              element: <ForgotPassword/>
+              element: <Reset/>
+            },
+            {
+              path:'reset',
+              element:<NewPassword/>
             }
 
           ]
@@ -56,11 +61,6 @@ function App() {
   ]);
 
   return (
-<<<<<<< HEAD
-   
-    <p>Hello world</p>
-   
-=======
     <>
     <Toaster/>
     <QueryClientProvider client={queryClient}>
@@ -68,7 +68,6 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>
     </>
->>>>>>> 1f56bacf29e773cf95d142340a2acf10ea42ab1c
   )
 }
 

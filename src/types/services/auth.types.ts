@@ -11,7 +11,7 @@ export type LoginRes = {
 };
 
 export type ResetPasswordInfo = {
-	phoneNumber: string;
-	password: string;
-	code: string;
+	password:string,
+	repeatPassword:string,
+	token:string|null
 };

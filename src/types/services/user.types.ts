@@ -21,3 +21,6 @@ export enum UserRole {
 export enum UserStatus {
 	ACTIVE = 'ACTIVE',
 }
+export type EmailChecker ={
+	email:""
+}

@@ -17,13 +17,14 @@ class AuthService {
 	}
 
 	public async createPasswordReset(
-		phoneNumber: string,
+		email: string,
 	): Promise<AxiosResponse> {
-		return appAxios.post('/auth/create-password-reset', {phoneNumber});
+		return appAxios.post('/users/request-password-reset', {email});
 	}
 
 	public async resetPassword(info: ResetPasswordInfo): Promise<AxiosResponse> {
-		return appAxios.post('/auth/updated-password-reset', info);
+	
+		return appAxios.post(`/users/reset-password/${info.token}`,info);
 	}
 }
 export const authService = new AuthService();
