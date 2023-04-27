@@ -1,5 +1,11 @@
-export default function dashboard() {
+import AdminProfile from "../components/AdminProfile";
+import DashboardLayout from "../layout/DashboardLayout";
+
+export default function Dashboard() {
   return (
-    <div>You are logged in</div>
+    <DashboardLayout>
+      {/* <ProfileSetting /> */}
+      <AdminProfile />
+    </DashboardLayout>
   )
 }
