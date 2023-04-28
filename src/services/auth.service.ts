@@ -1,4 +1,4 @@
-import type {Axios, AxiosResponse} from 'axios';
+import type { AxiosResponse} from 'axios';
 import appAxios from '../plugins/axios';
 import type {
 	LoginInfo,

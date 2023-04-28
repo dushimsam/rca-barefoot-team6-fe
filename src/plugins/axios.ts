@@ -13,11 +13,10 @@ const config: AxiosRequestConfig = {
 const appAxios = axios.create(config);
 
 const interceptAxiosRequest = (request: InternalAxiosRequestConfig) => {
-	const token = cookies.getCookie('user_info');
+	const token = cookies.getCookie('token');
 
 	if (token) {
-		const userInfo: LoginRes = JSON.parse(token);
-		request.headers.Authorization = `Bearer ${userInfo.accessToken}`;
+		request.headers.Authorization = `Bearer ${JSON.parse(token)}`;
 	}
 
 	return request;

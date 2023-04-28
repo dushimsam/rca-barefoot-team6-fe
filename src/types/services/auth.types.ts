@@ -6,8 +6,8 @@ export type LoginInfo = {
 };
 
 export type LoginRes = {
-	user: UserInfo;
-	accessToken: string;
+	message: string;
+	token: string;
 };
 
 export type ResetPasswordInfo = {

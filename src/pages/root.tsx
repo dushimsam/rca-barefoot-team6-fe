@@ -5,13 +5,11 @@ import Navbar from "../components/molecules/Navbar";
 
 export default function RootLayout() {
       return (
-        <>
-          <div id="navbar" className="container sticky top-0 bg-white py-2">
+        <div className="flex flex-col min-h-screen">
+            <div id="navbar" className="container sticky top-0 bg-white py-2">
             <Navbar/>
-          </div>
-          <div id="detail" className='container'>
+            </div>
             <Outlet/>
-          </div>
-        </>
-      );
+        </div>
+    );
 }

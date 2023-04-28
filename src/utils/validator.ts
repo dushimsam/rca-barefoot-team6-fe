@@ -71,12 +71,12 @@ const validate = {
             return 'This field is required';
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
+        // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
 
-        const message = 'Password must be at between 5-16 characters long, contain at least one lowercase letter, one uppercase letter, and one number';
-        if (!passwordRegex.test(value)) {
-            return message
-        }
+        // const message = 'Password must be at between 5-16 characters long, contain at least one lowercase letter, one uppercase letter, and one number';
+        // if (!passwordRegex.test(value)) {
+        //     return message
+        // }
     },
     phoneNumber: (value: string) => {
         if (!value) {
