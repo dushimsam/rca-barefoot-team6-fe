@@ -17,10 +17,19 @@ import ForgotPassword from './pages/auth/forgot';
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <RootLayout/>,
-      errorElement: <ErrorPage/>,
       children: [
+        {
+          path: '',
+          element: <RootLayout/>
+        },
+        {
+          path: '',
+          errorElement: <ErrorPage/>
+        },
+        {
+          path: 'home',
+          element: <RootLayout/>
+        },
         {
           path: 'about',
           element: <About/>
