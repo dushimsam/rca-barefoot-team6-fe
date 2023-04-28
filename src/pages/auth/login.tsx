@@ -131,11 +131,11 @@ export default function Login() {
           <div className="h-[1px] w-auto flex-1 bg-black"></div>
         </div>
         <div className="flex space-x-8">
-          <div onClick={loginWithGoogle} className="border-2 cursor-pointer border-black flex items-center flex-1 py-1 rounded-md gap-7">
+          <div onClick={loginWithGoogle} className="border-2 px-2 cursor-pointer border-black flex items-center flex-1 py-1 rounded-md gap-7">
             <GoogleLogo/>
             Google
           </div>
-          <div onClick={loginWithFacebook} className="border-2 cursor-pointer border-black flex items-center flex-1 py-1 rounded-md gap-7">
+          <div onClick={loginWithFacebook} className="border-2 px-2 cursor-pointer border-black flex items-center flex-1 py-1 rounded-md gap-7">
             <FacebookLogo/>
             Facebook
           </div>
