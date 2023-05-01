@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type {AxiosRequestConfig, InternalAxiosRequestConfig} from 'axios';
+import type { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import { LoginRes } from '../types/services/auth.types';
 import cookies from '../utils/cookies';
@@ -17,6 +17,8 @@ const interceptAxiosRequest = (request: InternalAxiosRequestConfig) => {
 
 	if (token) {
 		const userInfo: LoginRes = JSON.parse(token);
+		console.log("Token in Cookies: ", userInfo.accessToken);
+
 		request.headers.Authorization = `Bearer ${userInfo.accessToken}`;
 	}
 

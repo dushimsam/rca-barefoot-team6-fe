@@ -1,4 +1,4 @@
-import type {UserInfo} from './user.types';
+import type { UserInfo } from './user.types';
 
 export type LoginInfo = {
 	email: string;
@@ -7,6 +7,10 @@ export type LoginInfo = {
 
 export type LoginRes = {
 	user: UserInfo;
+	email?: string;
+	firstName?: UserInfo;
+	lastName?: string;
+	token: string;
 	accessToken: string;
 };
 
