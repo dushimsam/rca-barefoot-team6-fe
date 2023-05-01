@@ -18,10 +18,19 @@ import Dashboard from './pages/dashboard';
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <RootLayout />,
-      errorElement: <ErrorPage />,
       children: [
+        {
+          path: '',
+          element: <RootLayout />
+        },
+        {
+          path: '',
+          errorElement: <ErrorPage />
+        },
+        {
+          path: 'home',
+          element: <RootLayout />
+        },
         {
           path: 'about',
           element: <About />
@@ -56,7 +65,12 @@ function App() {
     },
     {
       path: '/dashboard',
-      element: <Dashboard />
+      children: [
+        {
+          path: '',
+          element: <Dashboard />
+        }
+      ]
     }
   ]);
 

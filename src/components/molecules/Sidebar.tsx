@@ -10,10 +10,10 @@ function Sidebar() {
                 <div className="flex flex-col justify-between items-center h-full">
                     <nav className="text-sm">
                         <div className="flex flex-col gap-8">
-                            <Link to="/" className="text-sm font-bold">
+                            <Link to="/dashboard" className="text-sm font-bold">
                                 <Button>Dashboard</Button>
                             </Link>
-                            <Link to="/profile" className="hover:text-blue-900 flex">
+                            <Link to="/dashboard" className="hover:text-blue-900 flex">
                                 <User />
                                 <p className='pl-4 pt-1'>Profile</p>
                             </Link>
@@ -43,11 +43,6 @@ function Sidebar() {
                             </Link>
                         </div>
                     </nav>
-                    {/* <div className="flex items-end">
-                        <button className="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded">
-                            Logout
-                        </button>
-                    </div> */}
                 </div>
             </div>
         </div>
