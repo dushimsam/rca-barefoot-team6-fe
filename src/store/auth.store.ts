@@ -1,13 +1,23 @@
-import {useMutation, useQuery} from 'react-query';
-import {authService} from '../services/auth.service';
+import { useMutation } from 'react-query';
+import { authService } from '../services/auth.service';
 
 class AuthStore {
+	token: string | undefined;
+	setToken(token: string | undefined) {
+		this.token = token;
+	}
+	getToken() {
+		return this.token;
+	}
 	login() {
 		return useMutation(authService.login);
 	}
-
 	register() {
 		return useMutation(authService.register);
+	}
+
+	updateUser() {
+		return useMutation(authService.updateUser);
 	}
 
 	createPasswordReset() {

@@ -10,16 +10,17 @@ import authStore from "../../store/auth.store";
 
 export default function Login() {
   const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
-  const {mutate, isLoading} = authStore.login();
+  const { mutate, isLoading, data } = authStore.login();
+
   const navigate = useNavigate();
   const [dataErrors, setDataErrors] = useState<{
     touched: {
       [key: string]: boolean
-  },
-  errors: {
+    },
+    errors: {
       [key: string]: string
-  },
-  hasError: boolean
+    },
+    hasError: boolean
   }>({
     touched: {},
     errors: {},
@@ -30,25 +31,29 @@ export default function Login() {
     password: ""
   })
 
-  const handleSubmit = (e: FormEvent)=>{
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const validateErrors = formValidate(formData);
     setDataErrors(validateErrors);
-    if(validateErrors.hasError) return;
-    
+    if (validateErrors.hasError) return;
+
     const toastId = toast.loading('Logging in...');
-    mutate(formData,{
-      onSuccess: (_)=>{
+    mutate(formData, {
+      onSuccess: (data) => {
         toast.success('You have been registered, enjoy!', {
           id: toastId
         })
+
+        authStore.setToken(data?.data.token) // save token to local storage)
+        localStorage.setItem("token", data.data.token);
+        console.log("Set Token: ", data?.data.token);
         navigate('/dashboard');
       },
-      onError: (error)=>{
+      onError: (error) => {
         toast.error(
           // @ts-ignore
-          Array.isArray(error?.response?.data) ? error?.response?.data?.message: error?.response?.data?.message 
-          || 'Failed to login',
+          Array.isArray(error?.response?.data) ? error?.response?.data?.message : error?.response?.data?.message
+            || 'Failed to login',
           {
             id: toastId
           }
@@ -56,16 +61,16 @@ export default function Login() {
       }
     });
   }
-  const handlePasswordShown = ()=>{
+  const handlePasswordShown = () => {
     setIsPasswordShown(!isPasswordShown);
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
-    const {name, value} = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     // check error
-    const validateErrors = formValidate({...formData, [name]: value});
+    const validateErrors = formValidate({ ...formData, [name]: value });
     // set errors
-    setDataErrors(previousErrors=>{
+    setDataErrors(previousErrors => {
       return {
         ...previousErrors,
         touched: {
@@ -79,14 +84,14 @@ export default function Login() {
         hasError: validateErrors.hasError
       }
     })
-    setFormData({...formData, [name]: value}); 
+    setFormData({ ...formData, [name]: value });
   }
 
-  const loginWithFacebook = ()=>{
+  const loginWithFacebook = () => {
     window.open(`${import.meta.env.VITE_BASE_URL}/users/auth/google`, "_self");
   }
 
-  const loginWithGoogle = ()=>{
+  const loginWithGoogle = () => {
     window.open(`${import.meta.env.VITE_BASE_URL}/users/auth/google`, "_self");
   }
 
@@ -97,7 +102,7 @@ export default function Login() {
       >Welcome back</h1>
 
       <p className="text-center text-[15px] text-gray-700 my-5">
-      Nice to see you again</p>
+        Nice to see you again</p>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
         <Input
           type="email"
@@ -108,12 +113,12 @@ export default function Login() {
           error={dataErrors.touched.email && dataErrors.errors.email || ''}
         />
         <Input
-          type={isPasswordShown?"text":"password"}
+          type={isPasswordShown ? "text" : "password"}
           placeholder="Your Password"
           name="password"
           id="password"
           onClickIcon={handlePasswordShown}
-          icon={isPasswordShown?<PasswordShown/>:<PasswordHidden/>}
+          icon={isPasswordShown ? <PasswordShown /> : <PasswordHidden />}
           error={dataErrors.touched.password && dataErrors.errors.password || ''}
           onChange={handleChange}
         />
@@ -132,11 +137,11 @@ export default function Login() {
         </div>
         <div className="flex space-x-8">
           <div onClick={loginWithGoogle} className="border-2 px-2 cursor-pointer border-black flex items-center flex-1 py-1 rounded-md gap-7">
-            <GoogleLogo/>
+            <GoogleLogo />
             Google
           </div>
           <div onClick={loginWithFacebook} className="border-2 px-2 cursor-pointer border-black flex items-center flex-1 py-1 rounded-md gap-7">
-            <FacebookLogo/>
+            <FacebookLogo />
             Facebook
           </div>
         </div>

@@ -5,12 +5,19 @@ export type CreateUser = {
 	password: string;
 };
 
+export type EditUser = {
+	firstName: string;
+	lastName: string;
+	email: string;
+	role?: string
+};
+
 export type UserInfo = {
 	id: string;
 	status: UserStatus;
 	createdAt: string;
 	updatedAt: string;
-} & CreateUser;
+} & CreateUser | EditUser;
 
 export enum UserRole {
 	SUPERADMIN = 'SUPERADMIN',

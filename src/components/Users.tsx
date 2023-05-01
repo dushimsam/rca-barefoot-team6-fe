@@ -7,8 +7,8 @@ function Users() {
             <p>Nelly Migisha</p>
             <p>Active</p>
             <p>nellymigisha@gmail.com</p>
-            <Button className='bg-[#6487FE] mx-4 text-white'>Edit Role</Button>
-            <Button className='bg-[#6487FE] mx-4 text-white'>Edit Role</Button>
+            <Button className='bg-[#6487FE] mx-4 text-white'>Edit User</Button>
+            {/* <Button className='bg-[#6487FE] mx-4 text-white'>Edit Role</Button> */}
         </div>
     )
 }
