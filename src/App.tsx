@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider
-} from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { queryClient } from './plugins/react-query';
@@ -14,6 +11,7 @@ import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import ForgotPassword from './pages/auth/forgot';
 import Dashboard from './pages/dashboard';
+import DisplayHotels from './pages/hotels';
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +40,10 @@ function App() {
         {
           path: 'services',
           element: <div>services</div>
+        },
+        {
+          path: 'hotels',
+          element: <DisplayHotels />
         },
         {
           path: 'auth',
@@ -85,4 +87,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
