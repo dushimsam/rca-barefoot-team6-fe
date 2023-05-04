@@ -14,6 +14,7 @@ import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import ForgotPassword from './pages/auth/forgot';
 import Dashboard from './pages/dashboard';
+import Requests from './components/dashboard/Requests';
 
 function App() {
   const router = createBrowserRouter([
@@ -60,17 +61,21 @@ function App() {
             }
 
           ]
+        },
+        {
+          path: 'dashboard',
+          children: [
+            {
+              path: '',
+              element: <Dashboard />
+            },
+            {
+              path: 'requests',
+              element: <Requests />
+            }
+          ]
         }
       ],
-    },
-    {
-      path: '/dashboard',
-      children: [
-        {
-          path: '',
-          element: <Dashboard />
-        }
-      ]
     }
   ]);
 

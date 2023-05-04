@@ -8,6 +8,7 @@ import ReactPaginate from 'react-paginate';
 import clsx from 'clsx';
 import EditRole from './EditRole';
 import ViewProfile from './ViewProfile';
+import Pagination from './dashboard/Pagination';
 
 
 function AdminProfile() {
@@ -99,21 +100,7 @@ function AdminProfile() {
                     </div>
                 ))}
                 {/* Render the pagination component */}
-                <ReactPaginate
-                    pageCount={pageCount}
-                    className='flex gap-5 justify-center pr-32 text-md py-4 items-end bg-[#00000011]'
-                    pageClassName={clsx('page-link', 'bg-white', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-100')}
-                    activeClassName={'active text-blue-400 font-bold'}
-                    previousClassName={'page-link'}
-                    nextClassName={'page-link'}
-                    breakClassName={'page-link'}
-                    onPageChange={handlePageClick}
-                    disabledClassName={'disabled'}
-                    pageRangeDisplayed={5}
-                    previousLabel={<ArrowLeftCircle />}
-                    nextLabel={<ArrowRightCircle />}
-                    containerClassName={'pagination'}
-                />
+                <Pagination pageCount={pageCount} handlePageClick={handlePageClick} />
             </div>
             {showProfile && <ViewProfile onReturn={handleReturn} />}
         </>

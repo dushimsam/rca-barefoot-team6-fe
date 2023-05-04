@@ -3,8 +3,10 @@ import type { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import { LoginRes } from '../types/services/auth.types';
 import cookies from '../utils/cookies';
+import { backendUrl } from './configUrl';
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const BASE_URL = backendUrl
+// import.meta.env.VITE_BASE_URL;
 
 const config: AxiosRequestConfig = {
 	baseURL: BASE_URL,

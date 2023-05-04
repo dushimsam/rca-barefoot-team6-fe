@@ -15,6 +15,19 @@ export type EditRoleType = {
 	id: number;
 	role: string
 }
+export type createRequest = {
+	roomId: number;
+	checkIn: string;
+	checkOut: string;
+	status?: RequestStatus
+}
+export type RequestInfo = {
+	userId: string;
+	createdAt: string;
+	updatedAt: string;
+	length?: number;
+} & createRequest;
+
 export type UserInfo = {
 	id: string;
 	status: UserStatus;
@@ -31,4 +44,9 @@ export enum UserRole {
 
 export enum UserStatus {
 	ACTIVE = 'ACTIVE',
+}
+export enum RequestStatus {
+	PENDING = 'ACTIVE',
+	APPROVED = 'APPROVED',
+	REJECTED = 'REJECTED'
 }
