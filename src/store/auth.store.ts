@@ -6,15 +6,19 @@ class AuthStore {
 	async updateUser(updatedUser: EditRoleType | EditUserType, id: number, config?: AxiosRequestConfig) {
 		try {
 			const response = await authService.updateUser(updatedUser, id, config);
-			console.log(response.data);
 			return response.data;
 		} catch (error) {
 			console.log("Error: ", error);
 			throw new Error('Failed to update user');
 		}
 	}
-	logout() {
-		return useMutation(authService.logout);
+	async logout(config?: AxiosRequestConfig) {
+		try {
+			const response = await authService.logout(config);
+			return response.data;
+		} catch (error) {
+			throw new Error('Logout Failed');
+		}
 	}
 	login() {
 		return useMutation(authService.login);
