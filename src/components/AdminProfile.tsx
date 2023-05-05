@@ -33,6 +33,7 @@ function AdminProfile() {
         };
         const response = await authService.viewUsers(config);
         setPageCount(Math.ceil(response.data.length / PAGE_LIMIT));
+        console.log("Users:", response.data);
         return response.data;
     });
 
@@ -82,7 +83,9 @@ function AdminProfile() {
                     <h4>Last Name</h4>
                     <h4>Role</h4>
                     <h4>Email</h4>
-                    <h4 className='mx-8'>Actions</h4>
+                    <div className="flex justify-around">
+                        <h4 className='mx-8'>Actions</h4>
+                    </div>
                 </div>
                 {currentData && currentData.map((user: UserInfo, index: number) => (
                     <div className='grid grid-cols-6 py-2 gap-2' key={index}>
@@ -90,13 +93,15 @@ function AdminProfile() {
                         <p>{user.lastName}</p>
                         <p>{user.role}</p>
                         <p>{user.email}</p>
-                        <Button onClick={() => handleEditRoleClick(user)} className='bg-[#6487FE] mx-8 text-white'>Edit Role</Button>
-                        {showEdit && <EditRole
-                            id={user.id}
-                            role={user.status}
-                            formData={roleData}
-                            setFormData={setRoleData}
-                            onClose={handleEditClose} />}
+                        <div className="flex justify-end">
+                            <Button onClick={() => handleEditRoleClick(user)} className='bg-[#6487FE] mx-8 text-white'>Edit Role</Button>
+                            {showEdit && <EditRole
+                                id={user.id}
+                                role={user.status}
+                                formData={roleData}
+                                setFormData={setRoleData}
+                                onClose={handleEditClose} />}
+                        </div>
                     </div>
                 ))}
                 {/* Render the pagination component */}

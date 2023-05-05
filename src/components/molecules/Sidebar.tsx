@@ -38,9 +38,9 @@ function Sidebar(props: any) {
         }
     }
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col flex-grow'>
             <Header data={data} />
-            <div className="w-full flex justify-between">
+            <div className="w-full flex justify-between flex-grow-0">
                 <div className='p-10 rounded-lg shadow-xl transform bg-white'>
                     <div className="flex flex-col justify-between items-center h-full">
                         <nav className="text-sm">

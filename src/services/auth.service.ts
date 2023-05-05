@@ -5,7 +5,7 @@ import type {
 	LoginRes,
 	ResetPasswordInfo,
 } from '../types/services/auth.types';
-import type { CreateUser, EditRoleType, EditUserType, RequestInfo, UserInfo } from '../types/services/user.types';
+import type { CreateUser, EditRoleType, EditUserType, RequestInfo, UserInfo, VerifyEmail } from '../types/services/user.types';
 
 class AuthService {
 	public async updateUser(updatedUser: EditRoleType | EditUserType, id: number, config?: AxiosRequestConfig): Promise<AxiosResponse<UserInfo>> {
@@ -25,8 +25,11 @@ class AuthService {
 	public async viewProfile(config?: AxiosRequestConfig): Promise<AxiosResponse<UserInfo>> {
 		return appAxios.get('/users/self', config);
 	}
+	public async verifyEmail(token: string | undefined, config?: AxiosRequestConfig): Promise<AxiosResponse<VerifyEmail>> {
+		return appAxios.get(`users/verify-email/${token}`, config);
+	}
 
-	public async viewRequests(): Promise<AxiosResponse<RequestInfo[]>> {
+	public async viewRequests(): Promise<AxiosResponse<{ data: RequestInfo[] }>> {
 		return appAxios.get('/requests');
 	}
 

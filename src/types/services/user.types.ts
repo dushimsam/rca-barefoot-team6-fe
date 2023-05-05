@@ -25,9 +25,12 @@ export type RequestInfo = {
 	userId: string;
 	createdAt: string;
 	updatedAt: string;
-	length?: number;
+	length: number;
 } & createRequest;
 
+export type VerifyEmail = {
+	token: string | undefined
+}
 export type UserInfo = {
 	id: string;
 	status: UserStatus;

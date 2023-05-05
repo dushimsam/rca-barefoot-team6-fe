@@ -15,6 +15,7 @@ import Register from './pages/auth/register';
 import ForgotPassword from './pages/auth/forgot';
 import Dashboard from './pages/dashboard';
 import Requests from './components/dashboard/Requests';
+import VerifyEmail from './components/VerifyEmail';
 
 function App() {
   const router = createBrowserRouter([
@@ -43,6 +44,10 @@ function App() {
         {
           path: 'services',
           element: <div>services</div>
+        },
+        {
+          path: 'verify/:token',
+          element: <VerifyEmail />
         },
         {
           path: 'auth',
