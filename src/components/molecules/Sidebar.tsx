@@ -7,8 +7,6 @@ import authStore from '../../store/auth.store';
 import Cookies from 'js-cookie';
 import cookies from '../../utils/cookies';
 import Header from './Header';
-import { useQuery } from 'react-query';
-import { authService } from '../../services/auth.service';
 import useProfileQuery from '../../utils/useProfileQuery';
 function Sidebar(props: any) {
     const { ChildrenProps } = props;
@@ -80,7 +78,7 @@ function Sidebar(props: any) {
                         </nav>
                     </div>
                 </div>
-                <div className=' py-2 flex justify-center'>
+                <div className='py-2 justify-self-center'>
                     {ChildrenProps.children}
                 </div>
             </div>

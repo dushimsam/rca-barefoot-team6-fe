@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
 import Button from './atoms/Button'
-import { authService } from '../services/auth.service';
-import { useQuery } from 'react-query';
-import { ArrowLeftCircle, ArrowRightCircle } from 'react-feather'
-import { CreateUser, EditRoleType, UserInfo } from '../types/services/user.types';
-import ReactPaginate from 'react-paginate';
-import clsx from 'clsx';
+import { EditRoleType, UserInfo } from '../types/services/user.types';
 import EditRole from './EditRole';
 import ViewProfile from './ViewProfile';
 import Pagination from './dashboard/Pagination';
-
+import { useViewUsers } from '../utils/usersQuery';
 
 function AdminProfile() {
     const [showProfile, setShowProfile] = useState(false);
@@ -20,23 +15,11 @@ function AdminProfile() {
     const handleReturn = () => {
         setShowProfile(false);
     };
-    const PAGE_LIMIT = 6; // number of items per page
+    const PAGE_LIMIT = 5; // number of items per page
     const [showEdit, setShowEdit] = useState(false);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    const { data } = useQuery<UserInfo[]>('viewUsers', async () => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        const response = await authService.viewUsers(config);
-        setPageCount(Math.ceil(response.data.length / PAGE_LIMIT));
-        console.log("Users:", response.data);
-        return response.data;
-    });
-
+    const { data, refetch } = useViewUsers(setPageCount);
     const handlePageClick = ({ selected: selectedPage }: { selected: number }) => {
         setCurrentPage(selectedPage);
     };
@@ -92,10 +75,11 @@ function AdminProfile() {
                         <p>{user.firstName}</p>
                         <p>{user.lastName}</p>
                         <p>{user.role}</p>
-                        <p>{user.email}</p>
+                        <p className='truncate'>{user.email}</p>
                         <div className="flex justify-end">
                             <Button onClick={() => handleEditRoleClick(user)} className='bg-[#6487FE] mx-8 text-white'>Edit Role</Button>
                             {showEdit && <EditRole
+                                refetch={refetch}
                                 id={user.id}
                                 role={user.status}
                                 formData={roleData}

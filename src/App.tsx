@@ -16,69 +16,78 @@ import ForgotPassword from './pages/auth/forgot';
 import Dashboard from './pages/dashboard';
 import Requests from './components/dashboard/Requests';
 import VerifyEmail from './components/VerifyEmail';
+import HomePage from './pages/home';
 
 function App() {
+
+  const DashBoardRoutes = [
+    {
+      path: '',
+      element: <Dashboard />
+    },
+    {
+      path: 'requests',
+      element: <Requests />
+    }
+  ]
+
+  const AuthRoutes = [
+    {
+      path: 'login',
+      element: <Login />,
+    },
+    {
+      path: 'register',
+      element: <Register />
+    },
+    {
+      path: 'forgot-password',
+      element: <ForgotPassword />
+    },
+    {
+      path: 'verify/:token',
+      element: <VerifyEmail />
+    },
+  ]
+
+  const UnothorizedViewPages = [
+    {
+      path: '',
+      element: <HomePage />
+    },
+    {
+      path: 'about',
+      element: <About />
+    },
+    {
+      path: 'contact',
+      element: <div>Contact</div>
+    },
+    {
+      path: 'services',
+      element: <div>services</div>
+    },
+    {
+      path: 'auth',
+      children: AuthRoutes,
+      // accessed via {hostname}/auth/{routename}
+    },
+  ]
+
   const router = createBrowserRouter([
     {
       children: [
         {
           path: '',
-          element: <RootLayout />
-        },
-        {
-          path: '',
-          errorElement: <ErrorPage />
-        },
-        {
-          path: 'home',
-          element: <RootLayout />
-        },
-        {
-          path: 'about',
-          element: <About />
-        },
-        {
-          path: 'contact',
-          element: <div>Contact</div>
-        },
-        {
-          path: 'services',
-          element: <div>services</div>
-        },
-        {
-          path: 'verify/:token',
-          element: <VerifyEmail />
-        },
-        {
-          path: 'auth',
-          children: [
-            {
-              path: 'login',
-              element: <Login />
-            },
-            {
-              path: 'register',
-              element: <Register />
-            },
-            {
-              path: 'forgot-password',
-              element: <ForgotPassword />
-            }
-
-          ]
+          element: <RootLayout />,
+          errorElement: <ErrorPage />,
+          children: UnothorizedViewPages,
+          // accessed via {hostname}/{routename}
         },
         {
           path: 'dashboard',
-          children: [
-            {
-              path: '',
-              element: <Dashboard />
-            },
-            {
-              path: 'requests',
-              element: <Requests />
-            }
-          ]
+          children: DashBoardRoutes
+          // accessed via {hostname}/dashboard/{routename}
         }
       ],
     }

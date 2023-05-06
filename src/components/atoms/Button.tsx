@@ -32,7 +32,7 @@ export default function Button(props: ButtonProps) {
                     'bg-secondary text-white': theme === 'secondary' && !outline,
                     'bg-transparent text-primary border-2 border-primary': outline && theme === 'primary',
                     'bg-transparent text-secondary border-2 border-secondary': outline && theme === 'secondary',
-                    'cursor-not-allowed': disabled
+                    'cursor-not-allowed bg-slate-300': disabled
                 },
                 className
             )}>{children}</button>

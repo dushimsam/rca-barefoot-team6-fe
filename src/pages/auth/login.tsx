@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { LoginInfo } from "../../types/services/auth.types";
 import { formValidate } from "../../utils/validator";
 import authStore from "../../store/auth.store";
+import cookies from "../../utils/cookies";
 
 export default function Login() {
   const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
@@ -41,14 +42,13 @@ export default function Login() {
     const toastId = toast.loading('Logging in...');
     mutate(formData, {
       onSuccess: (data) => {
-        toast.success('You have been registered, enjoy!', {
-          id: toastId
-        })
         Cookies.set("token", data.data.token);
 
         // save token to local storage)
         Cookies.set('token', data.data.token, { expires: 2 });
-
+        toast.success('You have been registered, enjoy!', {
+          id: toastId
+        })
         localStorage.setItem("token", data.data.token);
         navigate('/dashboard');
       },

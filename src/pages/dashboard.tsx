@@ -2,7 +2,6 @@ import { useQuery } from "react-query";
 import AdminProfile from "../components/AdminProfile";
 import ViewProfile from "../components/ViewProfile";
 import DashboardLayout from "../layout/DashboardLayout";
-import { authService } from "../services/auth.service";
 import useProfileQuery from "../utils/useProfileQuery";
 
 export default function Dashboard() {

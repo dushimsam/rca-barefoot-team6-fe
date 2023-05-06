@@ -1,13 +1,9 @@
 import React, { FormEvent, useState } from 'react'
 import Input from './atoms/Input'
-import appAxios from '../plugins/axios';
-import { CreateUser, EditRoleType, UserInfo } from '../types/services/user.types';
+import { EditRoleType } from '../types/services/user.types';
 import { formValidate } from '../utils/validator';
 import Button from './atoms/Button';
 import { toast } from 'react-hot-toast';
-import { useMutation, useQuery } from 'react-query';
-import { authService } from '../services/auth.service';
-import axios from 'axios';
 import authStore from '../store/auth.store';
 import Cookies from 'js-cookie';
 
@@ -17,16 +13,12 @@ interface EditRoleProps {
     id: number;
     onClose: Function;
     formData: EditRoleType;
+    refetch: Function;
     setFormData: React.Dispatch<React.SetStateAction<EditRoleType>>;
 }
 
 const EditRole: React.FC<EditRoleProps> = (props) => {
-    const { setFormData, formData, onClose } = props
-    // const { isLoading, data } = useQuery<UserInfo>('getUserById', async () => {
-
-    //     const response = await authService.getUserById(formData.id);
-    //     return response.data;
-    // });
+    const { setFormData, formData, onClose, refetch } = props
 
     const [dataErrors, setDataErrors] = useState<{
         touched: {
@@ -81,6 +73,7 @@ const EditRole: React.FC<EditRoleProps> = (props) => {
         };
         try {
             await authStore.updateUser(formData, formData.id, config);
+            refetch();
             toast.success('You have updated the user!', {
                 id: toastId,
             });

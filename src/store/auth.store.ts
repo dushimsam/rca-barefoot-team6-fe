@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { authService } from '../services/auth.service';
 import { EditRoleType, EditUserType } from '../types/services/user.types';
 import { AxiosRequestConfig } from 'axios';

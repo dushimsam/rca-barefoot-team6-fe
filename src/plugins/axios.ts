@@ -4,6 +4,7 @@ import axios from 'axios';
 import { LoginRes } from '../types/services/auth.types';
 import cookies from '../utils/cookies';
 import { backendUrl } from './configUrl';
+import Cookies from 'js-cookie';
 
 export const BASE_URL = backendUrl
 // import.meta.env.VITE_BASE_URL;
@@ -15,13 +16,13 @@ const config: AxiosRequestConfig = {
 const appAxios = axios.create(config);
 
 const interceptAxiosRequest = (request: InternalAxiosRequestConfig) => {
-	const token = cookies.getCookie('user_info');
+	const token = Cookies.get('token');
 
 	if (token) {
-		const userInfo: LoginRes = JSON.parse(token);
-		console.log("Token in Cookies: ", userInfo.accessToken);
+		// const userInfo: LoginRes = JSON.parse(token);
+		console.log("Token in Cookies: ", token);
 
-		request.headers.Authorization = `Bearer ${userInfo.accessToken}`;
+		request.headers.Authorization = `Bearer ${token}`;
 	}
 
 	return request;
