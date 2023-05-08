@@ -15,6 +15,7 @@ import Requests from './components/dashboard/Requests';
 import VerifyEmail from './components/VerifyEmail';
 import HomePage from './pages/home';
 import DisplayHotels from './pages/hotels';
+import HotelsMap from './pages/map/map';
 
 function App() {
 
@@ -31,7 +32,10 @@ function App() {
       path: 'hotels',
       element: <DisplayHotels />
     },
-
+    {
+      path: 'map',
+      element: <HotelsMap />
+    }
   ]
 
   const AuthRoutes = [

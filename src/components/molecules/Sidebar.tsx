@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Eye, Users, Settings, LogOut, Home, Map } from 'react-feather'
+import { User, Eye, Users, Settings, LogOut, Home, Map, Briefcase } from 'react-feather'
 import Button from '../atoms/Button';
 import { toast } from 'react-hot-toast';
 import authStore from '../../store/auth.store';
@@ -55,8 +55,12 @@ function Sidebar(props: any) {
                                     <p className='pl-4 pt-1 truncate'>View requests</p>
                                 </Link>
                                 <Link to="/dashboard/hotels" className="hover:text-blue-900 flex">
-                                    <Map />
+                                    <Home />
                                     <p className='pl-4 pt-1'>Hotels</p>
+                                </Link>
+                                <Link to="/dashboard/map" className="hover:text-blue-900 flex">
+                                    <Map />
+                                    <p className='pl-4 pt-1'>Map</p>
                                 </Link>
                                 <Link to="/rooms" className="hover:text-blue-900 flex">
                                     <Home />
@@ -70,7 +74,7 @@ function Sidebar(props: any) {
                                     <Settings />
                                     <p className='pl-4 pt-1'>Settings</p>
                                 </Link>
-                                <div onClick={() => handleLogout()} className="font-bold cursor-pointer py-7 text-red-600 hover:text-red-900 flex">
+                                <div onClick={() => handleLogout()} className="font-bold cursor-pointer text-red-600 hover:text-red-900 flex">
                                     <LogOut />
                                     <p className='pl-4 pt-2'>Logout</p>
                                 </div>
@@ -78,9 +82,7 @@ function Sidebar(props: any) {
                         </nav>
                     </div>
                 </div>
-                <div className='py-2 justify-self-center'>
-                    {ChildrenProps.children}
-                </div>
+                {ChildrenProps.children}
             </div>
         </div>
     )

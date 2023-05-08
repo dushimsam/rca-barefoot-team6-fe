@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from '../../components/atoms/Button';
 import { hotelService } from '../../services/hotel.service';
-import { HotelInfo } from '../../types/services/hotel.types';
+import { HotelInfos } from '../../types/services/hotel.types';
 import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NewHotel from '../../components/hotels/new';
@@ -13,7 +13,7 @@ import DashboardLayout from '../../layout/DashboardLayout';
 
 interface InputProps {
 	setOpenModal: (value: boolean) => void;
-	hotels?: HotelInfo[];
+	hotels?: HotelInfos[];
 }
 
 const TableHeader = (props: InputProps) => {
@@ -47,13 +47,13 @@ const TableHeader = (props: InputProps) => {
 };
 const DisplayHotels = () => {
 	const [hotels, setHotels] = useState([]);
-	const [selectedHotel, setSelectedHotel] = useState({} as HotelInfo);
+	const [selectedHotel, setSelectedHotel] = useState({} as HotelInfos);
 	const [openModal, setOpenModal] = useState(false);
 	const [openCreateModal, setOpenCreateModal] = useState(false);
 	const [openEditModal, setOpenEditModal] = useState(false);
-	const [hotelToEdit, setHotelToEdit] = useState({} as HotelInfo);
+	const [hotelToEdit, setHotelToEdit] = useState({} as HotelInfos);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
-	const [hotelToDelete, setHotelToDelete] = useState({} as HotelInfo);
+	const [hotelToDelete, setHotelToDelete] = useState({} as HotelInfos);
 
 	useEffect(() => {
 		if (Object.keys(hotelToEdit).length > 0) {
@@ -68,12 +68,12 @@ const DisplayHotels = () => {
 	}, [selectedHotel]);
 
 	useEffect(() => {
-		if (!openModal) setSelectedHotel({} as HotelInfo);
+		if (!openModal) setSelectedHotel({} as HotelInfos);
 	}, [openModal]);
 
 
 	useEffect(() => {
-		if (!openDeleteModal) setHotelToDelete({} as HotelInfo);
+		if (!openDeleteModal) setHotelToDelete({} as HotelInfos);
 	}, [openDeleteModal]);
 
 	useEffect(() => {
@@ -83,7 +83,7 @@ const DisplayHotels = () => {
 	}, [hotelToDelete]);
 
 	useEffect(() => {
-		if (!openEditModal) setHotelToEdit({} as HotelInfo);
+		if (!openEditModal) setHotelToEdit({} as HotelInfos);
 	}, [openEditModal]);
 
 	async function getHotels() {
@@ -144,7 +144,7 @@ const DisplayHotels = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{hotels.map((hotel: HotelInfo, i) => (
+							{hotels.map((hotel: HotelInfos, i) => (
 								<tr
 									className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 drop-shadow-md py-1 rounded'
 									key={i}
