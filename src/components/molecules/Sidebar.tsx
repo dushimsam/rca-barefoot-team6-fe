@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Eye, Users, Settings, LogOut, Home, Map } from 'react-feather'
+import { User, Eye, Users, Settings, LogOut, Home, Map, Briefcase } from 'react-feather'
 import Button from '../atoms/Button';
 import { toast } from 'react-hot-toast';
 import authStore from '../../store/auth.store';
@@ -51,8 +51,12 @@ function Sidebar() {
                                 <p className='pl-4 pt-1 truncate'>View requests</p>
                             </Link>
                             <Link to="/hotels" className="hover:text-blue-900 flex">
-                                <Map />                            
+                                <Briefcase />                            
                                 <p className='pl-4 pt-1'>Hotels</p>
+                            </Link>
+                            <Link to="/map" className="hover:text-blue-900 flex">
+                                <Map />                            
+                                <p className='pl-4 pt-1'>Map</p>
                             </Link>
                             <Link to="/rooms" className="hover:text-blue-900 flex">
                                 <Home />
