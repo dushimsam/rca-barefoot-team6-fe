@@ -4,7 +4,7 @@ import axios from 'axios';
 import { LoginRes } from '../types/services/auth.types';
 import cookies from '../utils/cookies';
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const BASE_URL = 'http://localhost:3000/api';
 
 const config: AxiosRequestConfig = {
 	baseURL: BASE_URL,

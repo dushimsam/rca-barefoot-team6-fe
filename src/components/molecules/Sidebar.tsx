@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import authStore from '../../store/auth.store';
 import Cookies from 'js-cookie';
 import cookies from '../../utils/cookies';
+
 function Sidebar() {
     const token = Cookies.get('token');
     const config = {
@@ -50,7 +51,7 @@ function Sidebar() {
                                 <p className='pl-4 pt-1 truncate'>View requests</p>
                             </Link>
                             <Link to="/hotels" className="hover:text-blue-900 flex">
-                                <Map />
+                                <Map />                            
                                 <p className='pl-4 pt-1'>Hotels</p>
                             </Link>
                             <Link to="/rooms" className="hover:text-blue-900 flex">

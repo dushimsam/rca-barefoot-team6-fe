@@ -14,6 +14,7 @@ import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import ForgotPassword from './pages/auth/forgot';
 import Dashboard from './pages/dashboard';
+import HotelsMap from './pages/map/map';
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +43,10 @@ function App() {
         {
           path: 'services',
           element: <div>services</div>
+        },
+        {
+          path: 'hotels',
+          element: <HotelsMap />
         },
         {
           path: 'auth',
