@@ -4,7 +4,7 @@ import axios from 'axios';
 import { LoginRes } from '../types/services/auth.types';
 import cookies from '../utils/cookies';
 
-export const BASE_URL = 'http://localhost:3000/api';
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const config: AxiosRequestConfig = {
 	baseURL: BASE_URL,
@@ -16,10 +16,8 @@ const interceptAxiosRequest = (request: InternalAxiosRequestConfig) => {
 	const token = cookies.getCookie('user_info');
 
 	if (token) {
-		const userInfo: LoginRes = JSON.parse(token);
-		console.log("Token in Cookies: ", userInfo.accessToken);
-
-		request.headers.Authorization = `Bearer ${userInfo.accessToken}`;
+		// const userInfo: LoginRes = JSON.parse(token);
+		request.headers.Authorization = `Bearer ${token}`;
 	}
 
 	return request;
