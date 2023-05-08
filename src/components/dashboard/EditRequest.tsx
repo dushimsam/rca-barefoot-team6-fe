@@ -13,6 +13,13 @@ interface EditRequestProps {
 }
 const EditRequest: React.FC<EditRequestProps> = (props) => {
     const { setFormData, formData, refetch, onClose } = props
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
 
     const { mutate: updateMutate, isLoading: rejectLoading } = requestStore.updateRequest();
     const [dataErrors, setDataErrors] = useState<{
@@ -113,7 +120,7 @@ const EditRequest: React.FC<EditRequestProps> = (props) => {
                                 type="date"
                                 name="checkIn"
                                 className='pt-3'
-                                defaultValue={formData.checkIn}
+                                defaultValue={formatDate(formData.checkIn)}
                                 id="checkIn"
                                 label='Check In Date'
                                 onChange={handleChange}
@@ -123,7 +130,7 @@ const EditRequest: React.FC<EditRequestProps> = (props) => {
                             />
                             <Input type="date"
                                 label='Check Out Date'
-                                defaultValue={formData.checkOut}
+                                defaultValue={formatDate(formData.checkOut)}
                                 name="checkOut"
                                 className='pt-3'
                                 id="checkOut"

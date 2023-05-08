@@ -7,8 +7,8 @@ export default function Requests() {
     return (
         <DashboardLayout>
             {data?.role === "ADMIN" ?
-                <ManageRequests />
-                : <UserRequests />
+                <UserRequests />
+                : <ManageRequests />
             }
 
         </DashboardLayout>

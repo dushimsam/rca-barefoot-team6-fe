@@ -26,7 +26,8 @@ class AuthService {
 		return appAxios.get('/users/self', config);
 	}
 	public async verifyEmail(token: string | undefined, config?: AxiosRequestConfig): Promise<AxiosResponse<VerifyEmail>> {
-		return appAxios.get(`users/verify-email/${token}`, config);
+
+		return appAxios.get(`/users/verify-email/${token}`, config);
 	}
 
 	public async viewUsers(config?: AxiosRequestConfig): Promise<AxiosResponse<UserInfo[]>> {

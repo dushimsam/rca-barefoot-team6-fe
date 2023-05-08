@@ -21,24 +21,19 @@ export default function VerifyEmail() {
             toast.success('Email verified successfully');
             navigate('/auth/login')
             // handle the response data as needed
-        } catch (error) {
-            console.error('Error verifying email:', error);
-            // handle the error as needed
-            toast.error('Email couldn\'t be verified');
+        } catch (error: any) {
+            console.log("Error", error?.response?.data?.message);
+
+            toast.error(error ? error?.response.data?.message : 'Email couldn\'t be verified');
         }
     }
 
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className='flex text-center justify-center items-center mt-32'>
-                <div className='bg-white shadow rounded max-w-xl py-8'>
-                    <h2>Your Verification Token:</h2>
-                    {/* <div className='grid grid-cols-2 gap-4'>
-                    <div> */}
-                    <div className='w-2/3 break-words py-8 pl-4'>
-                        <p className='text-xs text-center'>{token}</p>
-                    </div>
+                <div className='bg-white p-10 rounded max-w-xl py-8'>
+
                     <Button onClick={handleVerifyEmail}>Verify Email</Button>
                 </div>
             </div>
