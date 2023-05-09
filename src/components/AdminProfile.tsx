@@ -77,7 +77,7 @@ function AdminProfile() {
                         <p>{user.role}</p>
                         <p className='truncate'>{user.email}</p>
                         <div className="flex justify-end">
-                            <Button onClick={() => handleEditRoleClick(user)} className='bg-[#6487FE] mx-8 text-white'>Edit Role</Button>
+                            <Button onClick={() => handleEditRoleClick(user)} className='bg-[#6487FE] mx-4 text-white'>Change Role</Button>
                             {showEdit && <EditRole
                                 refetch={refetch}
                                 id={user.id}

@@ -112,7 +112,7 @@ function UserRequests() {
                                 <p className={`${req.status == RequestStatuses.REJECTED || req.status == RequestStatuses.CANCELLED ? 'text-[#FF1111]' : 'text-[#3C4DE9]'} 
                                 ${req.status == RequestStatuses.APPROVED && 'text-green-600'} lowercase`}>{req.status}</p>
                                 <Button className='mx-2' disabled={isFetching || req.status !== RequestStatuses.PENDING} onClick={() => handleCancel(req.id)}>Cancel</Button>
-                                <Button onClick={() => handleEditClick(req)} className='mx-2' disabled={isFetching || req.status !== RequestStatuses.PENDING}>Update</Button>
+                                <Button onClick={() => handleEditClick(req)} className='mx-2 bg-blue-500' disabled={isFetching || req.status !== RequestStatuses.PENDING}>Update</Button>
                                 <Button onClick={() => handleDelete(req.id)} className='mx-2 bg-red-600' disabled={isFetching}>Delete</Button>
                                 {showEdit && (
                                     <EditRequest

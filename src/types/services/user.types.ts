@@ -27,9 +27,10 @@ export type UserInfo = {
 } & CreateUser & EditRoleType;
 
 export enum UserRole {
-	SUPERADMIN = 'SUPERADMIN',
 	ADMIN = 'ADMIN',
-	USER = 'USER',
+	AGENT = 'AGENT',
+	CLIENT = 'CLIENT',
+	MANAGER = 'MANAGER'
 }
 
 export enum UserStatus {
