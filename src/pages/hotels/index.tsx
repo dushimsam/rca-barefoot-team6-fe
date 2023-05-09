@@ -152,7 +152,7 @@ const DisplayHotels = () => {
 								<td className='px-6 py-4'>{i + 1}</td>
 								<th
 									scope='row'
-									className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
+									className='px-6 py-4 font-medium text-gray-700 whitespace-nowrap '
 								>
 									{hotel.name}
 								</th>
@@ -167,7 +167,7 @@ const DisplayHotels = () => {
 										View More
 									</Button>
 									<Button
-										className='bg-green-600/50 mr-2 w-50'
+										className= ' bg-lime-700 mr-2 w-50'
 										onClick={() => setHotelToEdit(hotel)}
 									>
 										Edit
