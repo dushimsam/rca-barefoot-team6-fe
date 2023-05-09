@@ -16,6 +16,9 @@ import VerifyEmail from './components/VerifyEmail';
 import HomePage from './pages/home';
 import DisplayHotels from './pages/hotels';
 import HotelsMap from './pages/map/map';
+import Settings from './pages/settings/settings';
+import Users from './pages/users/users';
+import Rooms from './pages/rooms/rooms';
 
 function App() {
 
