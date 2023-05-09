@@ -30,6 +30,10 @@ class AuthStore {
 		return useMutation(authService.createPasswordReset);
 	}
 
+	requestPasswordReset(){
+		return useMutation(authService.requestPasswordReset)
+	}
+
 	resetPassword() {
 		return useMutation(authService.resetPassword);
 	}
