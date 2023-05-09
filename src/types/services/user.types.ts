@@ -15,6 +15,9 @@ export type EditRoleType = {
 	id: number;
 	role: string
 }
+export type VerifyEmail = {
+	token: string | undefined
+}
 export type UserInfo = {
 	id: string;
 	status: UserStatus;
@@ -24,9 +27,10 @@ export type UserInfo = {
 } & CreateUser & EditRoleType;
 
 export enum UserRole {
-	SUPERADMIN = 'SUPERADMIN',
 	ADMIN = 'ADMIN',
-	USER = 'USER',
+	AGENT = 'AGENT',
+	CLIENT = 'CLIENT',
+	MANAGER = 'MANAGER'
 }
 
 export enum UserStatus {

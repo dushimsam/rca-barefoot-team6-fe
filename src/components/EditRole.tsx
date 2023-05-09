@@ -1,15 +1,12 @@
 import React, { FormEvent, useState } from 'react'
 import Input from './atoms/Input'
-import appAxios from '../plugins/axios';
-import { CreateUser, EditRoleType, UserInfo } from '../types/services/user.types';
+import { EditRoleType, UserRole } from '../types/services/user.types';
 import { formValidate } from '../utils/validator';
 import Button from './atoms/Button';
 import { toast } from 'react-hot-toast';
-import { useMutation, useQuery } from 'react-query';
-import { authService } from '../services/auth.service';
-import axios from 'axios';
 import authStore from '../store/auth.store';
 import Cookies from 'js-cookie';
+import { RoomTypes } from '../types/services/room.types';
 
 // EditRole component
 interface EditRoleProps {
@@ -17,16 +14,12 @@ interface EditRoleProps {
     id: number;
     onClose: Function;
     formData: EditRoleType;
+    refetch: Function;
     setFormData: React.Dispatch<React.SetStateAction<EditRoleType>>;
 }
 
 const EditRole: React.FC<EditRoleProps> = (props) => {
-    const { setFormData, formData, onClose } = props
-    // const { isLoading, data } = useQuery<UserInfo>('getUserById', async () => {
-
-    //     const response = await authService.getUserById(formData.id);
-    //     return response.data;
-    // });
+    const { setFormData, formData, onClose, refetch } = props
 
     const [dataErrors, setDataErrors] = useState<{
         touched: {
@@ -42,7 +35,7 @@ const EditRole: React.FC<EditRoleProps> = (props) => {
         hasError: false
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
         // check error
         const validateErrors = formValidate({ ...formData, [name]: value }, name);
@@ -80,7 +73,11 @@ const EditRole: React.FC<EditRoleProps> = (props) => {
             },
         };
         try {
+            console.log('====================================');
+            console.log("Form Data: ", formData);
+            console.log('====================================');
             await authStore.updateUser(formData, formData.id, config);
+            refetch();
             toast.success('You have updated the user!', {
                 id: toastId,
             });
@@ -110,13 +107,12 @@ const EditRole: React.FC<EditRoleProps> = (props) => {
                     <form onSubmit={handleSubmit} className='bg-white text-gray-700 mx-8 rounded-lg p-6'>
                         <p className='text-center pb-4 text-lg'>Update Role</p>
                         <div className='grid grid-cols-1 gap-5'>
-                            <Input type="text"
-                                label='Role'
-                                name="role"
-                                defaultValue={formData.role}
-                                id="role"
-                                onChange={handleChange}
-                                error={dataErrors.touched.role && dataErrors.errors.role || ''} />
+                            <select className='p-4 outline-none' onChange={handleChange} defaultValue={formData.role} name="role" id="">
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="AGENT">AGENT</option>
+                                <option value="CLIENT">CLIENT</option>
+                                <option value="MANAGER">MANAGER</option>
+                            </select>
                         </div>
                         <div className='flex justify-center'>
                             <Button className='px-28 mt-4'

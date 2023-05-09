@@ -1,23 +1,27 @@
 import React, { FormEvent, useState } from 'react'
-import Input from './atoms/Input'
-import authStore from '../store/auth.store';
-import { EditUserType } from '../types/services/user.types';
-import { formValidate } from '../utils/validator';
-import Button from './atoms/Button';
+import { UpdateRequest } from '../../types/services/request.types';
+import { formValidate } from '../../utils/validator';
+import Button from '../atoms/Button';
+import Input from '../atoms/Input';
+import { requestStore } from '../../store/request.store';
 import { toast } from 'react-hot-toast';
-import Cookies from 'js-cookie';
-
-// EditUser component
-interface EditUserProps {
-    userId: number | undefined;
-    onClose: Function;
+interface EditRequestProps {
     refetch: Function;
-    formData: EditUserType;
-    setFormData: React.Dispatch<React.SetStateAction<EditUserType>>;
+    onClose: Function;
+    formData: UpdateRequest;
+    setFormData: React.Dispatch<React.SetStateAction<UpdateRequest>>;
 }
+const EditRequest: React.FC<EditRequestProps> = (props) => {
+    const { setFormData, formData, refetch, onClose } = props
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
 
-const EditUser: React.FC<EditUserProps> = (props) => {
-    const { setFormData, formData, onClose, userId, refetch } = props
+    const { mutate: updateMutate, isLoading: rejectLoading } = requestStore.updateRequest();
     const [dataErrors, setDataErrors] = useState<{
         touched: {
             [key: string]: boolean
@@ -56,6 +60,10 @@ const EditUser: React.FC<EditUserProps> = (props) => {
         }))
     }
 
+    const handleEditClose = () => {
+        onClose();
+    };
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const validateErrors = formValidate(formData);
@@ -63,34 +71,28 @@ const EditUser: React.FC<EditUserProps> = (props) => {
 
         setDataErrors(validateErrors);
         if (validateErrors.hasError) return;
-
         const toastId = toast.loading('Updating...');
-        const token = Cookies.get('token');
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        try {
-            const data = await authStore.updateUser(formData, userId ? userId : 0, config);
-            refetch();
-            toast.success('You have updated the user!', {
-                id: toastId,
-            });
-        } catch (error) {
-            toast.error(
-                // @ts-ignore
-                Array.isArray(error?.response?.data) ? error?.response?.data?.error[0] : error?.response?.data?.error
-                    || 'Failed to update user',
-                {
+        updateMutate(formData, {
+            onSuccess: (_) => {
+                toast.success('You have updated your request!', {
                     id: toastId
-                }
-            )
-        }
+                })
+                refetch();
+            },
+            onError: (error) => {
+                toast.error(
+                    // @ts-ignore
+                    Array.isArray(error?.response?.data) ? error?.response?.data?.error[0] : error?.response?.data?.error
+                        || 'Failed to update',
+                    {
+                        id: toastId
+                    }
+                )
+            }
+        });
     }
-    const handleEditClose = () => {
-        onClose();
-    };
+
+
     return (
         <div className="flex justify-center items-center fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div className="relative w-full max-w-xl max-h-full">
@@ -104,36 +106,38 @@ const EditUser: React.FC<EditUserProps> = (props) => {
                         <p className='font-bold pb-4 text-lg'>Update User</p>
                         <div className='grid grid-cols-1 gap-4'>
                             <Input
-                                type="text"
-                                defaultValue={formData.firstName}
-                                name="firstName"
-                                label='First Name'
-                                id="firstName"
+                                type="number"
+                                defaultValue={formData.roomId}
+                                name="roomId"
+                                label='Room Id'
+                                id="roomId"
                                 onChange={handleChange}
                                 error={
-                                    (dataErrors && dataErrors.touched?.firstName) ? dataErrors.errors?.firstName : ''
+                                    (dataErrors && dataErrors.touched?.roomId) ? dataErrors.errors?.roomId : ''
                                 }
                             />
                             <Input
-                                type="text"
-                                name="lastName"
-                                defaultValue={formData.lastName}
-                                id="lastName"
-                                label='Last Name'
+                                type="date"
+                                name="checkIn"
+                                className='pt-3'
+                                defaultValue={formatDate(formData.checkIn)}
+                                id="checkIn"
+                                label='Check In Date'
                                 onChange={handleChange}
                                 error={
-                                    (dataErrors && dataErrors.touched?.lastName) ? dataErrors.errors?.lastName : ''
+                                    (dataErrors && dataErrors.touched?.checkIn) ? dataErrors.errors?.checkIn : ''
                                 }
                             />
-                            <Input type="email"
-                                label='Email'
-                                defaultValue={formData.email}
-                                name="email"
-                                id="email"
+                            <Input type="date"
+                                label='Check Out Date'
+                                defaultValue={formatDate(formData.checkOut)}
+                                name="checkOut"
+                                className='pt-3'
+                                id="checkOut"
                                 onChange={handleChange}
-                                error={dataErrors.touched.email && dataErrors.errors.email || ''} />
+                                error={dataErrors.touched.checkOut && dataErrors.errors.checkOut || ''} />
                         </div>
-                        <Button className='px-24 mt-4'
+                        <Button className='px-32 mt-4'
                             disabled={dataErrors.hasError}>
                             Save
                         </Button>
@@ -144,4 +148,4 @@ const EditUser: React.FC<EditUserProps> = (props) => {
     )
 }
 
-export default EditUser
+export default EditRequest  

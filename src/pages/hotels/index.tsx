@@ -116,115 +116,115 @@ const DisplayHotels = () => {
 	return (
 		<DashboardLayout>
 
-		<div className='pt-5 px-2'>
-			<TableHeader setOpenModal={setOpenCreateModal} hotels={hotels} />
-			<div className='relative overflow-x-auto shadow-md sm:rounded-lg mt-2'>
-				<table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-					<thead className='text-xs text-gray-700 uppercase bg-white '>
-						<tr>
-							<th scope='col' className='px-6 py-3'>
-								#
-							</th>
-
-							<th scope='col' className='px-6 py-3'>
-								Hotel name
-							</th>
-							<th scope='col' className='px-6 py-3'>
-								Hotel email
-							</th>
-							<th scope='col' className='px-6 py-3'>
-								Website
-							</th>
-							<th scope='col' className='px-6 py-3'>
-								Address
-							</th>
-							<th scope='col-span-2' className='px-6 py-3'>
-								Action
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						{hotels.map((hotel: HotelInfos, i) => (
-							<tr
-								className='bg-white border-b  drop-shadow-xl py-1 rounded'
-								key={i}
-							>
-								<td className='px-6 py-4'>{i + 1}</td>
-								<th
-									scope='row'
-									className='px-6 py-4 font-medium text-gray-700 whitespace-nowrap '
-								>
-									{hotel.name}
+			<div className='pt-5 px-2'>
+				<TableHeader setOpenModal={setOpenCreateModal} hotels={hotels} />
+				<div className='relative overflow-x-auto shadow-md sm:rounded-lg mt-2'>
+					<table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
+						<thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+							<tr>
+								<th scope='col' className='px-6 py-3'>
+									#
 								</th>
-								<td className='px-6 py-4 text-gray-700'>{hotel.email}</td>
-								<td className='px-6 py-4 text-gray-700'>{hotel.website}</td>
-								<td className='px-6 py-4 text-gray-700'>{hotel.address}</td>
-								<td className='px-6 py-4 text-gray-700'>
-									<Button
-										className='mr-2 w-50'
-										onClick={() => setSelectedHotel(hotel)}
-									>
-										View More
-									</Button>
-									<Button
-										className= ' bg-lime-700 mr-2 w-50'
-										onClick={() => setHotelToEdit(hotel)}
-									>
-										Edit
-									</Button>
-									<Button
-										className='bg-red-600 w-50'
-										onClick={() => setHotelToDelete(hotel)}
-									>
-										Delete
-									</Button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-			<Modal
-				body={<ViewMore hotel={selectedHotel} />}
-				isOpen={openModal}
-				setIsOpen={setOpenModal}
-				title='View More about'
-			/>
-			<Modal
-				body={
-					<NewHotel
-						hotelId={hotelToEdit.id}
-						loadData={getHotels}
-						status='edit'
-						setOpenModal={setOpenEditModal}
-					/>
-				}
-				isOpen={openEditModal}
-				setIsOpen={setOpenEditModal}
-				title='Edit Hotel'
-			/>
-			<Modal
-				body={
-					<NewHotel loadData={getHotels} setOpenModal={setOpenCreateModal} />
-				}
-				isOpen={openCreateModal}
-				setIsOpen={setOpenCreateModal}
-				title='Create New Hotel'
-			/>
 
-			<Modal
-				body={
-					<DeleteConfirmation
-						onCancel={() => setOpenDeleteModal(false)}
-						onDelete={() => handleDeleteHotel()}
-					/>
-				}
-				hideClose={true}
-				isOpen={openDeleteModal}
-				setIsOpen={setOpenDeleteModal}
-				title=''
-			/>
-		</div>
+								<th scope='col' className='px-6 py-3'>
+									Hotel name
+								</th>
+								<th scope='col' className='px-6 py-3'>
+									Hotel email
+								</th>
+								<th scope='col' className='px-6 py-3'>
+									Website
+								</th>
+								<th scope='col' className='px-6 py-3'>
+									Address
+								</th>
+								<th scope='col-span-2' className='px-6 py-3'>
+									Action
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{hotels.map((hotel: HotelInfos, i) => (
+								<tr
+									className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 drop-shadow-md py-1 rounded'
+									key={i}
+								>
+									<td className='px-6 py-4'>{i + 1}</td>
+									<th
+										scope='row'
+										className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
+									>
+										{hotel.name}
+									</th>
+									<td className='px-6 py-4'>{hotel.email}</td>
+									<td className='px-6 py-4'>{hotel.website}</td>
+									<td className='px-6 py-4'>{hotel.address}</td>
+									<td className='px-6 py-4'>
+										<Button
+											className='mr-2 w-50'
+											onClick={() => setSelectedHotel(hotel)}
+										>
+											View More
+										</Button>
+										<Button
+											className='bg-green-600/50 mr-2 w-50'
+											onClick={() => setHotelToEdit(hotel)}
+										>
+											Edit
+										</Button>
+										<Button
+											className='bg-red-600/50 w-50'
+											onClick={() => setHotelToDelete(hotel)}
+										>
+											Delete
+										</Button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<Modal
+					body={<ViewMore hotel={selectedHotel} />}
+					isOpen={openModal}
+					setIsOpen={setOpenModal}
+					title='View More about'
+				/>
+				<Modal
+					body={
+						<NewHotel
+							hotelId={hotelToEdit.id}
+							loadData={getHotels}
+							status='edit'
+							setOpenModal={setOpenEditModal}
+						/>
+					}
+					isOpen={openEditModal}
+					setIsOpen={setOpenEditModal}
+					title='Edit Hotel'
+				/>
+				<Modal
+					body={
+						<NewHotel loadData={getHotels} setOpenModal={setOpenCreateModal} />
+					}
+					isOpen={openCreateModal}
+					setIsOpen={setOpenCreateModal}
+					title='Create New Hotel'
+				/>
+
+				<Modal
+					body={
+						<DeleteConfirmation
+							onCancel={() => setOpenDeleteModal(false)}
+							onDelete={() => handleDeleteHotel()}
+						/>
+					}
+					hideClose={true}
+					isOpen={openDeleteModal}
+					setIsOpen={setOpenDeleteModal}
+					title=''
+				/>
+			</div>
 		</DashboardLayout>
 	);
 };

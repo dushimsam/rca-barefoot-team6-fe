@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import Button from './atoms/Button'
-import { authService } from '../services/auth.service';
-import { useQuery } from 'react-query';
-import { ArrowLeftCircle, ArrowRightCircle } from 'react-feather'
-import { CreateUser, EditRoleType, UserInfo } from '../types/services/user.types';
-import ReactPaginate from 'react-paginate';
-import clsx from 'clsx';
+import { EditRoleType, UserInfo } from '../types/services/user.types';
 import EditRole from './EditRole';
 import ViewProfile from './ViewProfile';
-
+import Pagination from './dashboard/Pagination';
+import { useViewUsers } from '../utils/usersQuery';
 
 function AdminProfile() {
     const [showProfile, setShowProfile] = useState(false);
@@ -19,22 +15,11 @@ function AdminProfile() {
     const handleReturn = () => {
         setShowProfile(false);
     };
-    const PAGE_LIMIT = 6; // number of items per page
+    const PAGE_LIMIT = 5; // number of items per page
     const [showEdit, setShowEdit] = useState(false);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    const { data } = useQuery<UserInfo[]>('viewUsers', async () => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        const response = await authService.viewUsers(config);
-        setPageCount(Math.ceil(response.data.length / PAGE_LIMIT));
-        return response.data;
-    });
-
+    const { data, refetch } = useViewUsers(setPageCount);
     const handlePageClick = ({ selected: selectedPage }: { selected: number }) => {
         setCurrentPage(selectedPage);
     };
@@ -81,39 +66,30 @@ function AdminProfile() {
                     <h4>Last Name</h4>
                     <h4>Role</h4>
                     <h4>Email</h4>
-                    <h4 className='mx-8'>Actions</h4>
+                    <div className="flex justify-around">
+                        <h4 className='mx-8'>Actions</h4>
+                    </div>
                 </div>
                 {currentData && currentData.map((user: UserInfo, index: number) => (
                     <div className='grid grid-cols-6 py-2 gap-2' key={index}>
                         <p>{user.firstName}</p>
                         <p>{user.lastName}</p>
                         <p>{user.role}</p>
-                        <p>{user.email}</p>
-                        <Button onClick={() => handleEditRoleClick(user)} className='bg-[#6487FE] mx-8 text-white'>Edit Role</Button>
-                        {showEdit && <EditRole
-                            id={user.id}
-                            role={user.status}
-                            formData={roleData}
-                            setFormData={setRoleData}
-                            onClose={handleEditClose} />}
+                        <p className='truncate'>{user.email}</p>
+                        <div className="flex justify-end">
+                            <Button onClick={() => handleEditRoleClick(user)} className='bg-[#6487FE] mx-4 text-white'>Change Role</Button>
+                            {showEdit && <EditRole
+                                refetch={refetch}
+                                id={user.id}
+                                role={user.status}
+                                formData={roleData}
+                                setFormData={setRoleData}
+                                onClose={handleEditClose} />}
+                        </div>
                     </div>
                 ))}
                 {/* Render the pagination component */}
-                <ReactPaginate
-                    pageCount={pageCount}
-                    className='flex gap-5 justify-center pr-32 text-md py-4 items-end bg-[#00000011]'
-                    pageClassName={clsx('page-link', 'bg-white', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-100')}
-                    activeClassName={'active text-blue-400 font-bold'}
-                    previousClassName={'page-link'}
-                    nextClassName={'page-link'}
-                    breakClassName={'page-link'}
-                    onPageChange={handlePageClick}
-                    disabledClassName={'disabled'}
-                    pageRangeDisplayed={5}
-                    previousLabel={<ArrowLeftCircle />}
-                    nextLabel={<ArrowRightCircle />}
-                    containerClassName={'pagination'}
-                />
+                <Pagination pageCount={pageCount} handlePageClick={handlePageClick} />
             </div>
             {showProfile && <ViewProfile onReturn={handleReturn} />}
         </>

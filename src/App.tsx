@@ -11,6 +11,9 @@ import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import ForgotPassword from './pages/auth/forgot';
 import Dashboard from './pages/dashboard';
+import Requests from './components/dashboard/Requests';
+import VerifyEmail from './components/VerifyEmail';
+import HomePage from './pages/home';
 import DisplayHotels from './pages/hotels';
 import HotelsMap from './pages/map/map';
 import Settings from './pages/settings/settings';
@@ -18,81 +21,85 @@ import Users from './pages/users/users';
 import Rooms from './pages/rooms/rooms';
 
 function App() {
+
+  const DashBoardRoutes = [
+    {
+      path: '',
+      element: <Dashboard />
+    },
+    {
+      path: 'requests',
+      element: <Requests />
+    },
+    {
+      path: 'hotels',
+      element: <DisplayHotels />
+    },
+    {
+      path: 'map',
+      element: <HotelsMap />
+    }
+  ]
+
+  const AuthRoutes = [
+    {
+      path: 'login',
+      element: <Login />,
+    },
+    {
+      path: 'register',
+      element: <Register />
+    },
+    {
+      path: 'forgot-password',
+      element: <ForgotPassword />
+    },
+    {
+      path: 'verify/:token',
+      element: <VerifyEmail />
+    },
+  ]
+
+  const UnothorizedViewPages = [
+    {
+      path: '',
+      element: <HomePage />
+    },
+    {
+      path: 'about',
+      element: <About />
+    },
+    {
+      path: 'contact',
+      element: <div>Contact</div>
+    },
+    {
+      path: 'services',
+      element: <div>services</div>
+    },
+    {
+      path: 'auth',
+      children: AuthRoutes,
+      // accessed via {hostname}/auth/{routename}
+    },
+  ]
+
   const router = createBrowserRouter([
     {
       children: [
         {
           path: '',
-          element: <RootLayout />
+          element: <RootLayout />,
+          errorElement: <ErrorPage />,
+          children: UnothorizedViewPages,
+          // accessed via {hostname}/{routename}
         },
         {
-          path: '',
-          errorElement: <ErrorPage />
-        },
-        {
-          path: 'home',
-          element: <RootLayout />
-        },
-        {
-          path: 'about',
-          element: <About />
-        },
-        {
-          path: 'contact',
-          element: <div>Contact</div>
-        },
-        {
-          path: 'services',
-          element: <div>services</div>
-        },
-        {
-          path: 'hotels',
-          element: <DisplayHotels />
-        },
-        {
-          path: 'map',
-          element: <HotelsMap />
-        },
-        {
-          path: 'users',
-          element: <Users />
-        },
-        {
-          path: 'rooms',
-          element: <Rooms />
-        },
-        {
-          path: 'settings',
-          element: <Settings />
-        },
-        {
-          path: 'auth',
-          children: [
-            {
-              path: 'login',
-              element: <Login />
-            },
-            {
-              path: 'register',
-              element: <Register />
-            },
-            {
-              path: 'forgot-password',
-              element: <ForgotPassword />
-            }
-
-          ]
+          path: 'dashboard',
+          children: DashBoardRoutes
+          // accessed via {hostname}/dashboard/{routename}
         }
       ],
-    },
-    {
-      path: '/dashboard',
-      children: [
-        {
-          path: '',
-          element: <Dashboard />
-        }
-      ]
     }
   ]);
 

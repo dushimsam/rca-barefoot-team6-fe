@@ -4,8 +4,8 @@ import { useState } from "react";
 interface InputProps {
     type?: string;
     placeholder?: string;
-    value?: string;
-    defaultValue?: string;
+    value?: string | number;
+    defaultValue?: string | number;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     disabled?: boolean;

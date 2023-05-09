@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import { LoginRes } from '../types/services/auth.types';
-import cookies from '../utils/cookies';
+import Cookies from 'js-cookie';
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -13,10 +12,12 @@ const config: AxiosRequestConfig = {
 const appAxios = axios.create(config);
 
 const interceptAxiosRequest = (request: InternalAxiosRequestConfig) => {
-	const token = cookies.getCookie('user_info');
+	const token = Cookies.get('token');
 
 	if (token) {
 		// const userInfo: LoginRes = JSON.parse(token);
+		console.log("Token in Cookies: ", token);
+
 		request.headers.Authorization = `Bearer ${token}`;
 	}
 
