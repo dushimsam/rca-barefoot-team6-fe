@@ -120,7 +120,7 @@ const DisplayHotels = () => {
 			<TableHeader setOpenModal={setOpenCreateModal} hotels={hotels} />
 			<div className='relative overflow-x-auto shadow-md sm:rounded-lg mt-2'>
 				<table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-					<thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+					<thead className='text-xs text-gray-700 uppercase bg-white '>
 						<tr>
 							<th scope='col' className='px-6 py-3'>
 								#
@@ -146,20 +146,20 @@ const DisplayHotels = () => {
 					<tbody>
 						{hotels.map((hotel: HotelInfos, i) => (
 							<tr
-								className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 drop-shadow-md py-1 rounded'
+								className='bg-white border-b  drop-shadow-xl py-1 rounded'
 								key={i}
 							>
 								<td className='px-6 py-4'>{i + 1}</td>
 								<th
 									scope='row'
-									className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
+									className='px-6 py-4 font-medium text-gray-700 whitespace-nowrap '
 								>
 									{hotel.name}
 								</th>
-								<td className='px-6 py-4'>{hotel.email}</td>
-								<td className='px-6 py-4'>{hotel.website}</td>
-								<td className='px-6 py-4'>{hotel.address}</td>
-								<td className='px-6 py-4'>
+								<td className='px-6 py-4 text-gray-700'>{hotel.email}</td>
+								<td className='px-6 py-4 text-gray-700'>{hotel.website}</td>
+								<td className='px-6 py-4 text-gray-700'>{hotel.address}</td>
+								<td className='px-6 py-4 text-gray-700'>
 									<Button
 										className='mr-2 w-50'
 										onClick={() => setSelectedHotel(hotel)}
@@ -167,13 +167,13 @@ const DisplayHotels = () => {
 										View More
 									</Button>
 									<Button
-										className='bg-green-600/50 mr-2 w-50'
+										className= ' bg-lime-700 mr-2 w-50'
 										onClick={() => setHotelToEdit(hotel)}
 									>
 										Edit
 									</Button>
 									<Button
-										className='bg-red-600/50 w-50'
+										className='bg-red-600 w-50'
 										onClick={() => setHotelToDelete(hotel)}
 									>
 										Delete
