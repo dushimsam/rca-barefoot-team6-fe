@@ -37,6 +37,12 @@ class AuthService {
 	public async register(newUser: CreateUser): Promise<AxiosResponse<UserInfo>> {
 		return appAxios.post('/users', newUser);
 	}
+	
+	public async requestPasswordReset(
+		email: string,
+	): Promise<AxiosResponse> {
+		return appAxios.post('/users/request-password-reset', {email});
+	}
 
 	public async createPasswordReset(
 		phoneNumber: string,
