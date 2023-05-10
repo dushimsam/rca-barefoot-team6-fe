@@ -27,11 +27,13 @@ function Sidebar(props: any) {
             cookies.eraseCookie('token');
             console.log("Get Token ", Cookies.get("token"));
             navigate('/');
-        } catch (error) {
+        } catch (error:any) {
+            console.log("error--------", error?.response)
+            cookies.eraseCookie('token');
             toast.error(
                 // @ts-ignore
-                Array.isArray(error?.response?.data) ? error?.response?.data?.error[0] : error?.response?.data?.error
-                    || 'Failed to update role', { id: toastId, }
+                Array.isArray(error?.message) ? error?.message : error?.message
+                    || 'Failed to logout user', { id: toastId, }
             )
         }
     }
