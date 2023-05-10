@@ -17,7 +17,7 @@ const Settings = () => {
 	return (
 
 		<DashboardLayout>
-      <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 mt-10 ml-5">Account Settings</h2>
+      <h3 className="mb-4 text-2xl tracking-tight font-extrabold text-gray-900 mt-10 ml-5">Account Settings</h3>
       {data?.role === "ADMIN" ?
         <AdminProfile />
         : <ViewProfile />
