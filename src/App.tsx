@@ -38,6 +38,18 @@ function App() {
     {
       path: 'map',
       element: <HotelsMap />
+    },
+    {
+      path: 'users',
+      element: <Users />
+    },
+    {
+      path: 'rooms',
+      element: <Rooms />
+    },
+    {
+      path: 'Settings',
+      element: <Settings />
     }
   ]
 

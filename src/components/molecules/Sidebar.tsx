@@ -62,15 +62,15 @@ function Sidebar(props: any) {
                                     <Map />
                                     <p className='pl-4 pt-1'>Map</p>
                                 </Link>
-                                <Link to="/rooms" className="hover:text-blue-900 flex">
+                                <Link to="/dashboard/rooms" className="hover:text-blue-900 flex">
                                     <Home />
                                     <p className='pl-4 pt-1'> Rooms</p>
                                 </Link>
-                                <Link to="/users" className="hover:text-blue-900 flex">
+                                <Link to="/dashboard/users" className="hover:text-blue-900 flex">
                                     <Users />
                                     <p className='pl-4 pt-1'>Users</p>
                                 </Link>
-                                <Link to="/settings" className="hover:text-blue-900 flex">
+                                <Link to="/dashboard/settings" className="hover:text-blue-900 flex">
                                     <Settings />
                                     <p className='pl-4 pt-1'>Settings</p>
                                 </Link>

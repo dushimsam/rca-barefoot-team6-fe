@@ -1,46 +1,113 @@
+
+import Button from '../../components/atoms/Button';
 import DashboardLayout from '../../layout/DashboardLayout';
 
-const Rooms = () => {
+const User = () => {
 	
 	return (
+		<DashboardLayout>
+			<div className='pt-5 px-2'>
+      <div className='flex justify-between'>
+			<div className='grid grid-cols-2 gap-3'>
+				<div className='bg-violet-200 px-4 py-3 rounded-lg cursor-pointer'>
+					<h6 className='text-blue-600'>Availabe Rooms</h6>
+					<div className='flex mt-3'>
+						<div className='border-l-4 pr-1 border-blue-600'></div>
+						<p className='text-blue-600 font-bold text-lg'>3</p>
+					</div>
+				</div>
+				<div className='bg-violet-200 px-4 py-3 rounded-lg cursor-pointer'>
+					<h6 className='text-blue-600'>Active Hotels</h6>
+					<div className='flex mt-3'>
+						<div className='border-l-4 pr-1 border-blue-600'></div>
+						<p className='text-blue-600 font-bold text-lg'>9</p>
+					</div>
+				</div>
+			</div>
+			<div className='w-64'>
+				<Button className='mr-8'>
+					Create New Room
+				</Button>
+			</div>
+		</div>
+				<div className='relative overflow-x-auto shadow-md sm:rounded-lg mt-2'>
+					<table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
+						<thead className='text-xs text-gray-700 uppercase bg-white '>
+							<tr>
+								<th scope='col' className='px-6 py-3'>
+									#
+								</th>
 
-		<DashboardLayout>           
-<section className="flex items-center h-screen bg-white">
-  <div className="w-full max-w-screen-xl px-4 mx-auto lg:px-12">
-   
-    <div className="relative overflow-hidden bg-white shadow-xl text-black sm:rounded-lg">
-      <div className="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
-        <div>
-          <h5 className="mr-3 font-semibold text-black">All Rooms</h5>
-          <p className="text-gray-500 dark:text-gray-600">Manage all your Facility/Hotel Rooms</p>
-        </div>
-        <button type="button" 
-                className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="white"
-               >
-            <path
-              d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
-          </svg>
-          Add Room
-        </button>
-
-        
-      </div>
-    </div>
-  </div>
-</section>
-
-<section className="flex items-center h-screen bg-white ">
-  <div className="w-full max-w-screen-xl px-4 mx-auto lg:px-12">
-
-    <div className="relative overflow-hidden bg-white rounded-b-lg shadow-md dark:bg-gray-800">
-      
-    </div>
-  </div>
-</section>
-      
+								<th scope='col' className='px-6 py-3'>
+									Room name
+								</th>
+								<th scope='col' className='px-6 py-3'>
+									Accomodate
+								</th>
+								<th scope='col' className='px-6 py-3'>
+									Floor
+								</th>
+								<th scope='col' className='px-6 py-3'>
+									Room Type
+								</th>      
+                <th scope='col' className='px-6 py-3'>
+									Hotel Name
+								</th>   
+                <th scope='col' className='px-6 py-3'>
+									Description
+								</th>         
+								<th scope='col-span-2' className='px-6 py-3'>
+									Action
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+								<tr	className='bg-white border-b drop-shadow-xl py-1 rounded text-gray-900'>
+									<td className='px-6 py-4'>1</td>
+									<th	scope='row'className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '>Room 1</th>
+									<td className='px-6 py-4 text-gray-900'>1</td>
+									<td className='px-6 py-4 text-gray-900'>2</td>
+									<td className='px-6 py-4 text-gray-900'>SINGLE</td>
+                  <td className='px-6 py-4 text-gray-900'>The Grand Hotel</td>
+                  <td className='px-6 py-4 text-gray-900'>It is a king size four poster and provides a nice view of the lake.</td>
+									<td className='px-6 py-4 text-gray-900'>
+									<Button	className='bg-green-600/50 mr-2 w-50'>Book Now</Button>										
+										
+									</td>
+								</tr>
+                <tr	className='bg-white border-b drop-shadow-xl py-1 rounded text-gray-900'>
+									<td className='px-6 py-4'>2</td>
+									<th	scope='row'className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '>Room 320</th>
+									<td className='px-6 py-4 text-gray-900'>2</td>
+									<td className='px-6 py-4 text-gray-900'>4</td>
+									<td className='px-6 py-4 text-gray-900'>SUITE</td>
+                  <td className='px-6 py-4 text-gray-900'>The Grand Hotel</td>
+                  <td className='px-6 py-4 text-gray-900'> This room is configured with an extra roll-away bed for families of 3.</td>
+									<td className='px-6 py-4 text-gray-900'>
+									<Button	className='bg-green-600/50 mr-2 w-50'>Book Now</Button>										
+										
+									</td>
+								</tr>
+                <tr	className='bg-white border-b drop-shadow-xl py-1 rounded text-gray-900'>
+									<td className='px-6 py-4'>3</td>
+									<th	scope='row'className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap '>Room 43</th>
+									<td className='px-6 py-4 text-gray-900'>3</td>
+									<td className='px-6 py-4 text-gray-900'>2</td>
+									<td className='px-6 py-4 text-gray-900'>SINGLE</td>
+                  <td className='px-6 py-4 text-gray-900'>The Grand Hotel</td>
+                  <td className='px-6 py-4 text-gray-900'>It is a Deluxe king size room with a seating area, ample storage, digital safe and mini fridge.</td>
+									<td className='px-6 py-4 text-gray-900'>
+									<Button	className='bg-green-600/50 mr-2 w-50'>Book Now</Button>										
+										
+									</td>
+								</tr>
+					
+						</tbody>
+					</table>
+				</div>				
+			</div>
 		</DashboardLayout>
 	);
 };
 
-export default Rooms;
+export default User;
